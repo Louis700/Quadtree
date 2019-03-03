@@ -5,7 +5,9 @@ class TestQuadTree {
 		this.asserter = new Asserter();
 	}
 
-	test() { this.testEmpty();
+	test() { 
+		this.testEmpty();
+		this.testSubdivide();
 		this.testInsert();
 	}
 
@@ -48,9 +50,9 @@ class TestQuadTree {
 		this.asserter.assertTrue(qt.isSubdivided, 'TestSubdivide1, isSubdivided');
 
 		this.assertSubdivision(expectedNorthwest, qt.northwest, 'TestSubdivide1', 'northwest');
-		this.assertSubdivision(expectedNortheast, qt.northwest, 'TestSubdivide1', 'northeast');
-		this.assertSubdivision(expectedSouthwest, qt.northwest, 'TestSubdivide1', 'southwest');
-		this.assertSubdivision(expectedSoutheast, qt.northwest, 'TestSubdivide1', 'southeast');
+		this.assertSubdivision(expectedNortheast, qt.northeast, 'TestSubdivide1', 'northeast');
+		this.assertSubdivision(expectedSouthwest, qt.southwest, 'TestSubdivide1', 'southwest');
+		this.assertSubdivision(expectedSoutheast, qt.southeast, 'TestSubdivide1', 'southeast');
 	}
 	
 	testSubdivide2() {
@@ -62,14 +64,14 @@ class TestQuadTree {
 		let expectedNorthwest = new QuadTree(new Rectangle(new Vector(387.5, 387.5), new Vector(25, 25)), 3);
 		let expectedNortheast = new QuadTree(new Rectangle(new Vector(412.5, 387.5), new Vector(25, 25)), 3);
 		let expectedSouthwest = new QuadTree(new Rectangle(new Vector(387.5, 412.5), new Vector(25, 25)), 3);
-		let expectedSoutheast = new QuadTree(new Rectangle(new Vector(387.5, 387.5), new Vector(25, 25)), 3);
+		let expectedSoutheast = new QuadTree(new Rectangle(new Vector(412.5, 412.5), new Vector(25, 25)), 3);
 
 		this.asserter.assertTrue(qt.isSubdivided, 'TestSubdivide2, isSubdivided');
 
-		this.assertSubdivision(expectedNorthwest, qt.northwest, 'TestSubdivide1', 'northwest');
-		this.assertSubdivision(expectedNortheast, qt.northwest, 'TestSubdivide1', 'northeast');
-		this.assertSubdivision(expectedSouthwest, qt.northwest, 'TestSubdivide1', 'southwest');
-		this.assertSubdivision(expectedSoutheast, qt.northwest, 'TestSubdivide1', 'southeast');
+		this.assertSubdivision(expectedNorthwest, qt.northwest, 'TestSubdivide2', 'northwest');
+		this.assertSubdivision(expectedNortheast, qt.northeast, 'TestSubdivide2', 'northeast');
+		this.assertSubdivision(expectedSouthwest, qt.southwest, 'TestSubdivide2', 'southwest');
+		this.assertSubdivision(expectedSoutheast, qt.southeast, 'TestSubdivide2', 'southeast');
 	}
 
 	testInsertOne() {

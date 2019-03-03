@@ -10,25 +10,39 @@ class QuadTreeSubdivider {
 		this.createNortheast();
 		this.createSouthwest();
 		this.createSoutheast();
+
+		this.quadTree.isSubdivided = true;
 	}
 
 	createNorthwest() {
-		let boundary = new Rectangle(new Vector(50, 50), new Vector(100, 100));
+		let dimensions = new Vector(this.quadTree.boundary.dimensions.x/2, this.quadTree.boundary.dimensions.y/2);
+		let position = new Vector(this.quadTree.boundary.position.x - dimensions.x/2, this.quadTree.boundary.position.y - dimensions.y/2);
+
+		let boundary = new Rectangle(position, dimensions);
 		this.quadTree.northwest = new QuadTree(boundary, this.quadTree.capacity);
 	}
 
 	createNortheast() {
-		let boundary = new Rectangle(new Vector(150, 50), new Vector(100, 100));
+		let dimensions = new Vector(this.quadTree.boundary.dimensions.x/2, this.quadTree.boundary.dimensions.y/2);
+		let position = new Vector(this.quadTree.boundary.position.x + dimensions.x/2, this.quadTree.boundary.position.y - dimensions.y/2);
+	
+		let boundary = new Rectangle(position, dimensions);
 		this.quadTree.northeast = new QuadTree(boundary, this.quadTree.capacity);
 	}
 
 	createSouthwest() {
-		let boundary = new Rectangle(new Vector(50, 150), new Vector(100, 100));
+		let dimensions = new Vector(this.quadTree.boundary.dimensions.x/2, this.quadTree.boundary.dimensions.y/2);
+		let position = new Vector(this.quadTree.boundary.position.x - dimensions.x/2, this.quadTree.boundary.position.y + dimensions.y/2);
+	
+		let boundary = new Rectangle(position, dimensions);
 		this.quadTree.southwest = new QuadTree(boundary, this.quadTree.capacity);
 	}
 	
 	createSoutheast() {
-		let boundary = new Rectangle(new Vector(150, 150), new Vector(100, 100));
+		let dimensions = new Vector(this.quadTree.boundary.dimensions.x/2, this.quadTree.boundary.dimensions.y/2);
+		let position = new Vector(this.quadTree.boundary.position.x + dimensions.x/2, this.quadTree.boundary.position.y + dimensions.y/2);
+	
+		let boundary = new Rectangle(position, dimensions);
 		this.quadTree.southeast = new QuadTree(boundary, this.quadTree.capacity);
 	}
 }
