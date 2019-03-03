@@ -3,6 +3,7 @@
 class QuadTreeSubdivider {
 	constructor(quadTree) {
 		this.quadTree = quadTree;
+		this.calculator = new QuadTreeSubdivisionCalculator(quadTree);
 	}
 
 	subdivide() {
@@ -15,34 +16,22 @@ class QuadTreeSubdivider {
 	}
 
 	createNorthwest() {
-		let dimensions = new Vector(this.quadTree.boundary.dimensions.x/2, this.quadTree.boundary.dimensions.y/2);
-		let position = new Vector(this.quadTree.boundary.position.x - dimensions.x/2, this.quadTree.boundary.position.y - dimensions.y/2);
-
-		let boundary = new Rectangle(position, dimensions);
+		let boundary = new Rectangle(this.calculator.getNorthwestPosition(), this.calculator.getSubdivisionDimensions());
 		this.quadTree.northwest = new QuadTree(boundary, this.quadTree.capacity);
 	}
 
 	createNortheast() {
-		let dimensions = new Vector(this.quadTree.boundary.dimensions.x/2, this.quadTree.boundary.dimensions.y/2);
-		let position = new Vector(this.quadTree.boundary.position.x + dimensions.x/2, this.quadTree.boundary.position.y - dimensions.y/2);
-	
-		let boundary = new Rectangle(position, dimensions);
+		let boundary = new Rectangle(this.calculator.getNortheastPosition(), this.calculator.getSubdivisionDimensions());
 		this.quadTree.northeast = new QuadTree(boundary, this.quadTree.capacity);
 	}
 
 	createSouthwest() {
-		let dimensions = new Vector(this.quadTree.boundary.dimensions.x/2, this.quadTree.boundary.dimensions.y/2);
-		let position = new Vector(this.quadTree.boundary.position.x - dimensions.x/2, this.quadTree.boundary.position.y + dimensions.y/2);
-	
-		let boundary = new Rectangle(position, dimensions);
+		let boundary = new Rectangle(this.calculator.getSouthwestPosition(), this.calculator.getSubdivisionDimensions());
 		this.quadTree.southwest = new QuadTree(boundary, this.quadTree.capacity);
 	}
 	
 	createSoutheast() {
-		let dimensions = new Vector(this.quadTree.boundary.dimensions.x/2, this.quadTree.boundary.dimensions.y/2);
-		let position = new Vector(this.quadTree.boundary.position.x + dimensions.x/2, this.quadTree.boundary.position.y + dimensions.y/2);
-	
-		let boundary = new Rectangle(position, dimensions);
+		let boundary = new Rectangle(this.calculator.getSoutheastPosition(), this.calculator.getSubdivisionDimensions());
 		this.quadTree.southeast = new QuadTree(boundary, this.quadTree.capacity);
 	}
 }
